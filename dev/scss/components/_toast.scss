@@ -1,0 +1,78 @@
+@use "./abstracts/var" as v;
+@use "./abstracts/mixin" as m;
+@use 'sass:list';
+
+// ============================================
+// Toast Notification
+// ============================================
+
+.toast_alarm {
+  display: block;
+  position: fixed;
+  z-index: v.$z-toast;
+  bottom: v.$spacing-lg;
+  right: v.$spacing-lg;
+  
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: v.$spacing-sm;
+  }
+  
+  li {
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-end;
+    gap: v.$spacing-lg;
+    width: 300px;
+    border-radius: v.$spacing-sm;
+    border: 1px solid #000;
+    background-color: #fff;
+    
+    &::before {
+      @include m.shape(30px, auto);
+      background: url(../images/ico_toast.png) 50% no-repeat, red;
+      margin-right: auto;
+    }
+  }
+  
+  // Toast Background Colors
+  $colors: #4749c3, #fb6617, #ef4848;
+  
+  @for $i from 1 through 3 {
+    .toastbg#{$i} {
+      border-color: list.nth($colors, $i);
+      
+      &::before {
+        background-color: list.nth($colors, $i);
+      }
+    }
+  }
+  
+  .toast_msg {
+    flex: 0 1 auto;
+    text-align: right;
+    padding: v.$spacing-sm 0;
+    overflow: hidden;
+    
+    p {
+      @include m.text_ellipsis;
+      text-align: right;
+    }
+    
+    b {
+      color: #ef4848;
+      font-size: 16px;
+      font-weight: 800;
+    }
+  }
+  
+  .toast_time {
+    font-size: 11px;
+  }
+  
+  .btn_cross {
+    align-self: flex-start;
+    margin: v.$spacing-md;
+  }
+}

@@ -1,0 +1,270 @@
+@use "./abstracts/var" as v;
+@use "./abstracts/mixin" as  m;
+
+// ============================================
+// GIS Components
+// ============================================
+
+.gis_area {
+  position: relative;
+  background-color: v.$bg-soft;
+  border: 1px solid v.$border-default;
+  
+  .gis_wrap {
+    height: 100%;
+  }
+
+  .layer{position:relative;}
+}
+
+.flex_wrap > .gis_area {
+  flex: 0.7;
+}
+
+// Symbols Container
+.symbols {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.symbol,
+.marker {
+  position: absolute;
+  left: var(--left);
+  top: var(--top);
+}
+
+// Symbol & Marker Base Styles
+.symbol > button,
+.marker {
+  display: flex;
+  white-space: pre;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background-repeat: no-repeat;
+  font-size: 0;
+  cursor: pointer;
+  
+  &.selected,
+  &:has(:checked) {
+    background-image: url(../images/device_ico_on_GR.png);
+    width: v.$icon-size-xl;
+    height: 35px;
+    transform: translate(2px, -18px);
+  }
+}
+
+.symbol {
+  border-radius: 50%;
+  
+  & > button {
+    background-image: url(../images/device_ico_GR.png);
+    
+    &.fail {
+      background-image: url(../images/device_ico_RE.png);
+      
+      &.selected {
+        background-image: url(../images/device_ico_on_RE.png);
+      }
+    }
+    
+    &.notuse {
+      background-image: url(../images/device_ico_GY.png);
+      
+      &.selected {
+        background-image: url(../images/device_ico_on_GY.png);
+      }
+    }
+  }
+}
+
+.marker {
+  background-image: url(../images/device_ico_GY.png);
+  
+  &:has(.layer) {
+    z-index: v.$z-layer;
+  }
+}
+
+.marker input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  appearance: none;
+  outline: none;
+  box-shadow: none;
+  vertical-align: middle;
+}
+
+// ============================================
+// Device Type Positions
+// ============================================
+
+.BIS,
+.CDB,
+.LDB,
+.TDB,
+.PDB,
+.ADD {
+  background-position-x: 0;
+  
+  &::before {
+    background-position-x: 0;
+  }
+}
+
+.VBS,
+.VNS,
+.VNI,
+.VNO,
+.RAS,
+.DSB {
+  background-position-x: -33px;
+  
+  &.selected,
+  &:has(:checked) {
+    background-position-x: -36px;
+  }
+  
+  &::before {
+    background-position-x: -25px;
+  }
+}
+
+.BIS,
+.VBS {
+  background-position-y: 0;
+  
+  &.selected,
+  &::before {
+    background-position-y: 0;
+  }
+}
+
+.VNS,
+.CDB {
+  background-position-y: -35px;
+  
+  &.selected,
+  &:has(:checked) {
+    background-position-y: -45px;
+  }
+  
+  &::before {
+    background-position-y: -26px;
+  }
+}
+
+.VNI,
+.LDB {
+  background-position-y: -70px;
+  
+  &.selected,
+  &:has(:checked) {
+    background-position-y: -90px;
+  }
+  
+  &::before {
+    background-position-y: -52px;
+  }
+}
+
+.VNO,
+.TDB {
+  background-position-y: -105px;
+  
+  &.selected,
+  &:has(:checked) {
+    background-position-y: -135px;
+  }
+  
+  &::before {
+    background-position-y: -78px;
+  }
+}
+
+.RAS,
+.PDB {
+  background-position-y: -140px;
+  
+  &.selected,
+  &:has(:checked) {
+    background-position-y: -180px;
+  }
+  
+  &::before {
+    background-position-y: -104px;
+  }
+}
+
+.DSB,
+.ADD {
+  background-position-y: -175px;
+  
+  &.selected,
+  &:has(:checked) {
+    background-position-y: -225px;
+  }
+  
+  &::before {
+    background-position-y: -130px;
+  }
+}
+
+// ============================================
+// Info Layer
+// ============================================
+
+.layer {
+  position:absolute;
+  width: 290px;
+  background-color: #fff;
+  border-radius: v.$spacing-sm;
+  padding: v.$spacing-xl;
+  border: 1px solid #b4b4b4;
+  box-shadow: v.$shadow-box;
+  
+  & > strong {
+    display: block;
+    width: calc(100% - v.$spacing-2xl);
+    color: v.$black-800;
+    font-size: 16px;
+    margin-bottom: v.$spacing-sm;
+  }
+  
+  .btn_cross {
+    float: right;
+    
+    &::before {
+      font-size: v.$input-font-size;
+      color: v.$black-900;
+    }
+  }
+  
+  .lst {
+    @include m.flex($direction: column, $align: flex-start);
+    gap: v.$spacing-sm;
+    font-size: v.$defaultFontSize;
+    
+    li {
+      display: flex;
+      align-items: flex-start;
+    }    
+       
+    em {
+      flex-shrink: 0;
+      width: 80px;
+      font-weight: 600;
+      
+      &::before {
+        content: "·";
+        margin-right: v.$spacing-sm;
+      }
+    }
+  }
+}

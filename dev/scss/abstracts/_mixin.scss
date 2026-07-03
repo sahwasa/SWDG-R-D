@@ -1,0 +1,169 @@
+@use "./abstracts/var" as v;
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:color';
+
+@mixin mobile_only {
+  @media (max-width: #{$breakpoint-mobile}){@content;}}
+@mixin mobile_tablet {
+  @media (min-width: #{$breakpoint-mobile_tablet}) and (max-width: #{$breakpoint-tablet - 1px}){
+    @content;
+  }
+}
+@mixin tablet_only {
+  @media (min-width: #{$breakpoint-tablet}) and (max-width: #{$breakpoint-desktop - 1px}){
+    @content;
+  }
+}
+@mixin desktop{
+  @media (max-width: #{$breakpoint-desktop}){@content;}}
+@mixin desktop_only{
+  @media (min-width: #{$breakpoint-desktop}){@content;}}
+@mixin firefox_only{
+  @-moz-document url-prefix(){
+    @content;
+  }
+}
+@mixin blind{
+  font-size:0;line-height:0;position:absolute!important;left:0;top:0;text-indent:-9999px;visibility:hidden;overflow:hidden;
+}
+@mixin ipt_common(){width:var(--form-width, 250px);height:34px;font-size:14px;border:1px solid v.$border-ipt;border-radius:v.$input-border-radius;color:#101010;padding:8px 10px;}
+@mixin ipt_hidden{position:absolute;opacity:0;width:0;height:0;appearance:none;outline:none;box-shadow:none;vertical-align:middle;}
+@mixin f_blind{
+  font-size:0!important;line-height:0;overflow:hidden;
+}
+@mixin alignL($numbers){
+  @each $num in $numbers{
+   &:nth-of-type(#{$num}){text-align:left;@content;}
+  } 
+}
+@mixin flex($justify:flex-start, $align:center, $direction:row, $display:null) {
+  display:flex;justify-content:$justify;align-items:$align;flex-direction:$direction;
+  @if($display != null){display:$display;}
+  @content;
+}
+@mixin full{display:block;width:100%!important;min-width:auto;}
+@mixin badge_style($max_w:auto){display:inline-block;max-width:$max_w;
+color:#fff;font-size:12px;letter-spacing:-.3px;text-align:center;border-radius:5px;
+border:1px solid transparent;}
+@mixin shape($w_size,$h_size){
+  display:inline-block;content:"";overflow:hidden;font-size:0;width:$w_size;height:$h_size;
+}
+@mixin fontello($ic){
+  display:inline-block;font-family:"fontello";font-weight:normal;content:$ic;line-height:1;
+}
+@mixin ico_only($font:null,$color:inherit,$x:0,$y:0,$w:12px,$h:12px,$imgurl:'ico.png'){font-size:0 !important;vertical-align:middle;line-height:1;color:$color;@content;
+  @if($font!=null){
+    &::before{@include fontello($font);font-size:13px;}                                                   
+  }@else{
+    &::before{@include shape($w,$h);background:url(../images/#{$imgurl}) $x $y no-repeat;vertical-align:text-top;}
+  }
+   &:hover{filter:contrast(130%);}
+}
+@mixin actions(){
+  display: flex; justify-content: flex-end; align-items: center; flex-direction: row; gap: 6px;
+  &-left{margin-right:auto;}
+}
+@mixin btn($color:#fff,$border:transparent,$bg:#fff,$addTxt:false,$target:'before',$hover:true){  
+  display:inline-block;font-size:v.$text-size-md;line-height:14px;border:1px solid $border;border-radius:v.$btn-border-radius;padding:9px 17px;cursor:pointer;color:$color;background-color:$bg;flex-shrink:0;white-space:nowrap;font-weight:600;
+  &[disabled]{cursor:default;}
+  @if($hover){
+    &:not(:disabled):is(:hover,:hover::before){box-shadow:2px 2px 3px rgba(0,0,0,.25) inset;}
+  }
+  @if($addTxt){display:inline-flex;align-items:center;gap:5px;
+    &::#{$target}{@include fontello($addTxt);vertical-align:middle;font-size:14px;}
+  }
+  &.disabled{background:v.$bg-light!important;}
+}
+//btnsize
+%btn-size--sm{padding:4px 13px;font-size:12px;}
+%btn-size--xs{border-radius:8px;padding:3px 9px;font-size:12px;}
+
+/* ico_fileName Extention */
+@mixin ico_ext($x, $y){
+  $x: ($x * -20) - 3;
+  $y: ($y * -20) - 2;
+  &::before{@include shape(17px,17px);float:left;margin-right:3px;background:url(../images/ico_fileExt.png) #{$x}px #{$y}px no-repeat;}
+}
+
+@mixin explanation{@include flex;gap:5px;font-weight:normal;word-break:keep-all;
+  @content;
+  &::before{@include fontello('\eb77');align-self:flex-start;position:relative;top:3px;color:v.$primary;line-height:1;}
+}
+@mixin textStroke($weight:1,$color:#fff){
+  text-shadow:#{$weight}px 0 0 $color, -#{$weight}px 0 0 $color, 0 #{$weight}px 0 $color,0 -#{$weight}px 0 $color;
+}
+@mixin textEllipsis($line: 1) {text-align:left;overflow:hidden;text-overflow:ellipsis;vertical-align:middle;
+  @if $line == 1 {
+    white-space: nowrap;
+  } @else {
+    display: -webkit-box;
+    -webkit-line-clamp: $line;
+    -webkit-box-orient: vertical;
+  }
+}
+@mixin divide($w:1px,$h:10px,$target:'before',$color:v.$border-default){
+  position:relative;display:inline-flex;align-items:center;vertical-align:middle;
+  &::#{$target}{@include shape($w,$h);background-color:$color;flex-shrink:0;}
+}
+@mixin label_item($hideIpt: false, $onBg: v.$primary, $color: #333, $onColor: #fff, $onBorder:#c5c9d0){display:inline-flex;gap:12px;color:$color;border:1px solid #c5c9d0;border-radius:3px;padding:5px 7px;outline:1px solid transparent;cursor:pointer;
+  input{width:18px;aspect-ratio:1;}
+  &:has(:checked){border-color:$onBg;}
+  @if($hideIpt){
+    &{justify-content:center;gap:0;}
+    input{position:absolute;opacity:0;width:0;height:0;
+        :not(&:disabled),
+        :not(&:read-only){&:hover+label{cursor:pointer;}}
+    }
+    &:has(:checked){background-color:$onBg;color:$onColor;border-color:$onBorder;}
+  }  
+}
+@mixin box(
+    $borderColor:v.$gray-500,
+    $borderWidth: 1px,
+    $bgColor:#fff,
+    $padding:20px,
+    $radius:15px,
+    $shadow:null
+  ){
+  border:$borderWidth solid $borderColor;border-radius:$radius;background-color:$bgColor;padding:$padding;
+  @if $shadow != null {
+    box-shadow: $shadow;
+  }
+}
+@mixin blink($aniName, $color) {
+  animation: $aniName 1s step-start infinite;
+  @keyframes #{$aniName} {
+    50% { background-color: $color; }
+  }
+}
+@mixin stickyTit($sticky:true){
+  @if($sticky){position:sticky;left:0;top:0;}@else{}
+  background-color:#fff;box-shadow:0 4px 6px -4px rgba(0,0,0,0.16);padding-bottom:5px;margin-bottom:0;z-index:100;
+}
+@mixin divide($h:10px,$gap:5px){
+  position:relative;display:inline-flex;align-items:center;
+  &::before{@include shape(1px,$h);background-color:v.$gray-300;margin:0 $gap;}
+}
+// abstracts/_mixin.scss
+@mixin dl-field-base {
+  dt, dd {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  dt {
+    color: v.$black-700;
+    font-weight: 600;
+    font-size: v.$text-size-sm;
+    flex-shrink: 0;
+  }
+  dd {
+    position: relative;
+    & > :is(input, select, textarea):not(.auto-width) {
+      flex: 1;
+      width: 100%;
+    }
+  }
+}
+

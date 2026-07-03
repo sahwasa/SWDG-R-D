@@ -1,0 +1,85 @@
+@use "./abstracts/var" as v;
+@use "./abstracts/mixin" as m;
+
+// ============================================
+// Modal/Popup Components
+// ============================================
+
+::backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.dialog {
+  min-width: 700px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  border: 1px solid v.$gray-700;
+  border-radius:10px;
+  box-shadow:1px 1.7px 35px 0 rgba(0, 0, 0, 0.27);
+  background-color: #fff;
+  z-index: v.$z-modal;
+   &__header {padding:30px 30px 15px;
+    h2{ font-size: v.$spacing-2xl; letter-spacing: -0.9px; color: v.$primary;font-weight:700; }
+    &-desc{display:block;color:v.$black-700;font-size:v.$text-size-md;}
+    &-close {
+      position: absolute;
+      right: 14px;
+      top: 18px;
+      font-size:36px;
+      line-height:16px;
+      -webkit-text-stroke: #fff .5px;
+    }
+  }
+  &__body {
+    max-height: calc(100vh - 250px);   
+    overflow-y: auto;
+    background-color: #fff;
+    padding:15px 30px;    
+  } 
+  &__footer {padding:15px 30px 30px;
+    @include m.actions;
+  }
+  &--confirm{min-width:360px;
+    .dialog__header{
+      h2{text-align:center;color:#000;}
+      &--warn::before{@include m.shape(39px,35px);display:block;background:url(../../images/ico.png) -148px 0 no-repeat;margin:0 auto 10px;}
+    }
+    .dialog__body{padding-top:0;font-size:v.$text-size-md;
+      em{font-weight:600;}
+    }
+  }
+}
+.popover{position:fixed;border:1px solid #1c3ee9;border-radius:5px;padding:15px 35px 15px 20px;background-color:#fff;z-index: v.$z-modal;box-shadow: 1px 1.7px 6px 0 rgba(0, 0, 0, 0.19);
+  &__header{margin-bottom:5px;
+    strong{color:v.$primary;font-size:15px;font-weight:700;line-height:1;}
+    &-close {
+      position: absolute;
+      right:8px;
+      top:3px;
+      font-size:24px;
+      line-height:1;
+    }
+  }  
+}
+
+.dialog-join{min-width:500px;
+  .dialog{
+    &__header h2{
+      color:#000;
+      text-align:center;
+    }
+  }
+  .list{
+    &-top{margin-bottom:19px;}
+    &-form{
+      input{border-radius:0;border-width:0 0 1px;}
+    }
+  }
+}

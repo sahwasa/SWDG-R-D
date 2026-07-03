@@ -1,0 +1,21 @@
+@use "./abstracts/var" as v;
+@use "./abstracts/mixin" as m;
+/* paginate */
+.paginate{display:flex;align-items:center;justify-content:center;margin-top:32px;text-align:center;gap:2px;
+  span{vertical-align:top;}
+  .page-btn{position:relative;flex:0 30px;padding:5px;font-size:15px;line-height:normal;font-weight:normal;border-radius:5px;border:1px solid #e2e2e2;
+    &.is-selected,
+    &:not(:has(span)):hover{color:#fff;background-color:v.$primary;border-color:transparent;}
+    &.is-disabled ::before,
+    &.is-disabled:hover{background-color:transparent;color:#ccc;cursor:not-allowed;}
+  }
+  $_page_ico_btn:( 'prev':'〈', 'next':'〉', 'first':'〈〈', 'last':'〉〉' );
+  @each $type, $txt in $_page_ico_btn{
+    .#{$type}{_width /**/:47px;width:30px;height:30px;background-color:#fff;margin:0 1px;
+      &:hover{background-color:#edf0f3;}
+    }
+    .ico-#{$type}{@include m.f-blind;
+      &::before{font-size:10px;line-height:19px;font-weight:bold;content:$txt;}
+    }
+  }
+}

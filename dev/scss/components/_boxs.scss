@@ -1,0 +1,10 @@
+@use "./abstracts/var" as v;
+@use "./abstracts/mixin" as  m;
+
+// ============================================
+// Box Components
+// ============================================
+
+.box{
+  @include m.box();   
+}

@@ -1,0 +1,40 @@
+@use "./abstracts/var" as v;
+@use "./abstracts/mixin" as  m;
+@use 'sass:map';
+@use 'sass:color';
+
+
+// ==========================================================================
+// model-list
+// ==========================================================================
+.model-list{
+  @include m.flex($direction:column,$align:stretch);
+  .page-wrap:has(.tbl-wrap){flex:1;}
+  .tbl-wrap{max-height: calc(100vh - 375px);height:stretch;}
+}
+
+// ==========================================================================
+// model-view
+// ==========================================================================
+.model-view{
+  .model-detail{
+    &__wrap{
+      @include m.box;padding:30px 25px;
+      fieldset{border:none;padding:10px 0;}
+      .attach-section{width:50%;}
+      .detail-list{padding-top:20px;
+        label{
+          min-width:auto;
+          &::before{display:none;}
+        }
+      }
+      .tbl-wrap{max-height:112px;}
+      legend{background-color:v.$gray-100;border-radius:10px;font-size:v.$text-size-sm;
+        padding:0 15px;
+      }
+    }
+    &__actions{@include m.actions;padding:0 10px;margin-top:10px;
+      button{@extend %btn-size--sm;}
+    }
+  }
+}

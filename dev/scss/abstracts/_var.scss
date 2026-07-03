@@ -1,0 +1,211 @@
+@use 'sass:color';
+
+// Breakpoints (사용하지 않으나 호환성 유지)
+$breakpoint-mobile: 767px;
+$breakpoint-mobile_tablet: 1024px;
+$breakpoint-tablet: 1200px;
+$breakpoint-desktop: 1600px;
+
+// ============================================
+// Spacing System
+// ============================================
+$spacing-xxs: 3px;
+$spacing-xs: 4px;
+$spacing-sm: 5px;
+$spacing-md: 8px;
+$spacing-lg: 10px;
+$spacing-xl: 15px;
+$spacing-2xl: 20px;
+$spacing-3xl: 30px;
+$spacing-4xl: 40px;
+$spacing-5xl: 50px;
+$spacing-6xl: 70px;
+
+// ============================================
+// Base Palette
+// ============================================
+$white: #fff;
+
+$blue-100: #f4f6ff;
+$blue-150: #eceef9;
+$blue-200: #9dabf3;
+$blue-300: #057ffc;
+$blue-400: #5078a5;
+$blue-500: #1465c0;
+$blue-600: #0b31f2;
+$blue-700: #003964;
+
+$red-200: #ec5a5a;
+$red-300: #fa5b5b;
+$red-400: #ed3c3c;
+$red-500: #e42b29;
+$red-600: #dd1d1d;
+
+$green-100: #daf2e1;
+$green-500: #1aa303;
+$green-600: #098703;
+$yellow-500: #d58007;
+
+$gray-050: #f6f6f6; 
+$gray-100: #ECECEC;
+$gray-200: #cdd1d5;
+$gray-300: #adadad;
+$gray-400: #b8c4d2;
+$gray-500: #dadada;
+$gray-600: #aeaeae;
+$gray-700: #777;
+$gray-800: #888;
+$gray-900: #999;
+
+$black-400: #586779;
+$black-500: #555555;
+$black-600: #666;
+$black-700: #777;
+$black-800: #222222;
+$black-900: #000000;
+
+$mute-red: #d17887;
+$mute-orange:  #C4845A;
+$mute-purple: #A083AF;
+$mute-olive: #B5A983;
+$mute-green: #7AA19D;
+$mute-blue: #8f99a3;
+
+// ============================================
+// Semantic Colors
+// ============================================
+$primary: #3C58E8;
+$primary-light: $blue-100;
+$primary-dark: color.mix(#000, $primary, 30%);
+
+$all: $black-400;
+$success: $green-500;
+$warning: $yellow-500;
+$error: $red-200;
+$normal: $green-500;
+$info: $blue-300;
+
+// Text
+$text-primary: $black-500;
+$text-disabled: $gray-300;
+$text-success: $green-500;
+$text-error: $red-200;
+
+// Background
+$bg-default: #F5F6F8;
+$bg-light: #f9fafb;
+$bg-soft: $blue-100;
+
+// Border
+$border-default: $gray-100;
+$border-layout: #d2d2d2;
+$border-ipt: $gray-500;
+$border-box: $gray-600;
+
+// ============================================
+// Component Sizes
+// ============================================
+
+// Button
+$btn-padding-y: 7px;
+$btn-padding-x: 10px;
+$btn-border-radius: 4px;
+$btn-gap: 5px;
+$btn-font-size: 13px;
+
+// Input
+$input-padding-y: 6px;
+$input-padding-x: 10px;
+$input-border-radius: 4px;
+$input-font-size: 14px;
+
+// Box
+$box-padding: 20px;
+$box-border-radius: 10px;
+
+// Icon
+$icon-size-sm: 12px;
+$icon-size-md: 16px;
+$icon-size-lg: 20px;
+$icon-size-xl: 24px;
+$icon-size-2xl: 32px;
+
+// text
+$text-size-xs: 11px;
+$text-size-sm: 12px;
+$text-size-md: 14px;
+$text-size-lg: 16px;
+$text-size-xl: 18px;
+$text-size-2xl: 20px;
+
+// Gap
+$gap-xs: 4px;
+$gap-sm: 6px;
+$gap-md: 10px;
+$gap-lg: 15px;
+$gap-xl: 18px;
+$gap-2xl: 50px;
+
+// ============================================
+// Connection Status Map
+// ============================================
+$connection: (
+  all: (color: $black-400, icon: '\f1db', txt:'전체'),
+  connection: (color: $green-500, icon: '\eb2d', txt:'연결됨'),
+  disconnection: (color: $red-200, icon: '\0021', txt:'연결안됨')
+);
+
+$status:(
+  use:(color: $green-500, icon: '\ebe5', txt:'사용'),
+  notuse:(color: $gray-800, icon: '\eb70', txt:'미사용'),
+  active:(color: $green-500, icon: '\ebe5', txt:'구동중'),
+  normal:(color: $green-500, icon: '\eb6d', txt:'정상'),
+  warning:(color: #f6751d, icon: '\eb35', txt:'확인필요'),
+  stop:(color: $gray-800, icon: '\ebc6', txt:'중단'),
+  na:(color: $gray-800, icon: '\eb70', txt:'미대상')
+);
+
+$result:(
+  all:$black-900,
+  success:$blue-200,
+  fail:$red-200,
+  notuse:$gray-900,
+);
+
+// ============================================
+// Layout
+// ============================================
+$mainwidth: 1440px;
+$maingap: 30px;
+$subgap: 20px;
+$sectiongap: 50px;
+$defaultFontSize: 13px;
+
+// Header
+$header-height: 80px;
+$nav-height: 48px;
+
+// Footer
+$footer-height: 60px;
+
+// LNB
+$lnb-width: 300px;
+
+// Shadow
+$shadow-default: 0 2px 10px rgba(0, 0, 0, .13);
+$shadow-box: 0 2px 9px rgba(0, 0, 0, .22);
+$shadow-button: 2px 2px 3px rgba(0, 0, 0, .25) inset;
+
+// Z-index
+$z-header: 100;
+$z-nav: 200;
+$z-nav-item: 300;
+$z-sticky: 100;
+$z-layer: 1000;
+$z-toast: 9999;
+$z-modal: 99999;
+
+// Transition
+$transition-fast: 0.05s;
+$transition-normal: 0.5s;
+$transition-delay: 0.2s;

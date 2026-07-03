@@ -1,0 +1,133 @@
+@use "./abstracts/var" as v;
+@use "./abstracts/mixin" as  m;
+@use 'sass:color';
+
+//ipt custom
+select,
+textarea,
+input:not(:is([type="radio"],[type="checkbox"])){@include m.ipt_common;}
+input[type="radio"]{border-radius:50%;vertical-align:middle;accent-color:v.$primary;}
+input[type="checkbox"]{border-radius:3px;vertical-align:middle;accent-color:v.$primary;}
+input[type="number"]::-webkit-inner-spin-button {appearance:none;-moz-appearance:none;-webkit-appearance:none;}
+textarea{max-height:300px;resize:none;background:transparent;}
+input:is([type="radio"],[type="checkbox"]).is-invalid,
+input.is-invalid{position:relative;box-shadow: 0 0 0 2px v.$error;background-color:#faebe9;color:v.$error;}
+p.is-invalid{color:v.$error;display:none;
+  &::before{@include m.fontello('\e877');margin-right:5px;}
+}
+input:read-only{background-color:#eeeff1;pointer-events:none;}
+:disabled{background-color:#eeeff1;}
+label:has(input){display:inline-flex;justify-content:flex-start;align-items:center;gap:5px;white-space:nowrap;}
+.is-required{
+  &::after{content:"*";color:v.$red-300;margin-left:3px;}
+}
+input[type="datetime-local"],
+input[type="time"],
+input[type="datetime"],
+input[type="date"]{position:relative;}
+input[type="datetime-local"]::-webkit-calendar-picker-indicator,
+input[type="datetime"]::-webkit-calendar-picker-indicator,
+input[type='time']::-webkit-calendar-picker-indicator,
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator{position:relative;z-index:2;right:-5px;width:12px;height:12px;background:url(../images/ico_calendar.png) 0 0 / contain no-repeat;cursor: pointer;}
+select{width:auto;padding-right:30px;background:url(../images/btn_select.png) right 10px center no-repeat #fff;appearance:none;}
+input[list]{background:url(../images/btn_select.png) right 10px center no-repeat;}
+input[list]::-webkit-calendar-picker-indicator{-webkit-appearance:none;-moz-appearance:none;appearance:none;padding:2px 30px 2px 10px;background:url(../images/btn_select.png) right 8px center no-repeat, rgba(255,255,255,.9);list-style:none!important;
+  option:nth-of-type(1){color:#989898;}
+}
+.check_group{@include m.flex;
+  label{flex:1;}
+}
+.ipt{
+  &-group{@include m.flex{gap:4px;}
+    .flex1{flex:1;
+      input{width:100%;}
+    }
+  }
+  &-range{@include m.flex{gap:8px;};
+    &::before{content:'~'};
+    input:first-of-type{order:-1;}
+  }
+}
+.range{
+  &-px{@include m.flex{gap:22px;};font-size:14px;
+    &::before{content:'×';font-size:24px;}
+    input{width:110px;text-align:center;}  
+    label:first-of-type{order:-1;}
+  }
+  &-time{@include m.flex{gap:20px};
+    input:not(:is([type="radio"],[type="checkbox"])){width:85px;}
+    label:has([type="checkbox"]){margin-left:10px;}
+  }
+}
+textarea,
+.full{flex:1;width:100%;}
+
+.selected {
+  margin-top: 7px;
+}
+
+// Full Input Style
+.full_ipt {
+  :is(input:not(:is([type="radio"], [type="checkbox"]))) {
+    width: 100%;
+  }
+}
+.info{color:v.$black-800;}
+fieldset{padding:v.$gap-lg;border:1px solid v.$gray-500;border-radius:10px;
+  &:not(:first-of-type){margin-top:v.$subgap;}
+}
+legend{color:v.$black-900;font-weight:600;font-size:v.$text-size-sm;}
+
+.list{
+  &-top{margin-bottom:6px;}
+  &-form{
+    display:flex;flex-direction:column;gap:20px;
+    @include m.dl-field-base;
+
+    & > div{display:grid;grid-template-rows:repeat(2,auto);grid-auto-flow:column;grid-auto-columns:1fr;column-gap:15px;row-gap:7px;}
+
+    dt,dd{
+      justify-content:flex-start;align-items:flex-start; // base의 align-items:center 오버라이드
+      &.span2{grid-column: span 2;}
+    }
+    dd{
+      &:not(.is-row){flex-direction:column;align-items:stretch;}
+    }
+    textarea{height:100%;}
+  }
+}
+
+.detail{
+  &-wrap{margin-bottom:v.$maingap;}
+  &-list{
+    display:flex;flex-direction:column;gap:12px;
+    &.page-wrap{padding:15px v.$sectiongap;}
+    border-bottom:1px solid v.$border-layout;
+    @include m.dl-field-base;
+    & > div{
+      display:flex;
+      align-items:flex-start;
+      gap:15px 24px;
+      &.is-full{
+        dd{width:100%;}
+      }
+    }  
+    dt{min-height:34px;}
+    dd{
+      flex:1;
+      span{white-space:nowrap;}
+      &.is-flex05{flex:.5;}
+      &.is-flex2{flex:2;}
+    }
+    label{
+      min-width:40px;
+      white-space:nowrap;
+      &::before{@include m.shape(3px,3px);border-radius:50%;background-color:v.$gray-900;margin-right:4px;vertical-align:middle;}
+    }
+    textarea{width:100%;min-height:60px;}
+    &__actions{margin-top:10px;
+      @include m.actions;
+    }
+  }
+}

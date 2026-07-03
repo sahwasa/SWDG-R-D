@@ -1,0 +1,76 @@
+@use "./abstracts/var" as v;
+@use "./abstracts/mixin" as  m;
+
+// ============================================
+// Navigation
+// ============================================
+
+.nav {
+  width:v.$lnb-width;
+  border-right:1px solid v.$border-layout;
+  padding:20px 0;
+  &__list {
+    a{color:v.$black-700;}
+    & > li {
+      &:not(:last-of-type){margin-bottom:12px;}
+      & > a{
+        display:flex;align-items:center;gap:10px;
+        font-weight:700;
+        padding:10px 30px;
+        font-size:v.$text-size-xl;
+        border-radius:8px;
+        &::before{@include m.shape(28px,30px);background:url(../../images/ico.png) 10px 6px no-repeat;}
+        &.is-active{
+          &::before{background-position-x:-18px;}
+        }
+        &:is(.is-active,:hover,:focus){color:v.$primary;}
+      }
+      @for $i from 1 through 2{
+        &:nth-child(#{$i}) > a::before{background-position-y: (($i - 1) * -28px) + 6px;}
+      }
+    }
+    .is-active{
+      font-weight: 700;
+      color:v.$primary;
+    }
+  }
+  &__sublist{
+    a{font-size:v.$text-size-lg;padding:12px 12px 0 18px;
+      &::before{@include m.shape(11px, 12px);margin-right:7px;}
+      &:is(.is-active,:hover,:focus)::before{background:url(../../images/ico.png)-57px 0 no-repeat;}
+    }
+  } 
+}
+
+// ============================================
+// Breadcrumb
+// ============================================
+
+.bredcrumb {
+  margin-left: auto;  
+  ul {
+    @include m.flex;
+  }  
+  li {
+    color: #888;
+    letter-spacing: -0.65px;
+    
+    &:first-child {
+      @include m.ico_only($y: -84px);
+      
+      a {
+        @include m.f_blind;
+      }
+    }
+    
+    &:last-child {
+      color: #000;
+    }
+    
+    &::before {
+      @include m.fontello('\f105');
+      margin: 0 v.$spacing-md;
+      color: #888;
+    }
+  }
+}

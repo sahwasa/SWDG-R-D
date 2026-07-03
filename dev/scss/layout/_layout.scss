@@ -1,0 +1,188 @@
+@use "./abstracts/var" as v;
+@use "./abstracts/mixin" as  m;
+
+// ============================================
+// Main Layout
+// ============================================
+
+.wrap {
+  @include m.flex($direction:column,$align:stretch);
+  height:stretch;
+  min-width: v.$mainwidth;
+  min-height: 100vh;
+  font-size: v.$btn-font-size;
+}
+
+.container{
+  @include m.flex($align:stretch);flex:1;
+}
+// ============================================
+// Header
+// ============================================
+.header {
+  position: relative; 
+  @include m.flex;  
+  height:v.$header-height;
+  z-index: v.$z-header;
+  background-color:#fff;  
+  border-bottom:1px solid v.$border-layout;  
+  box-shadow: 1px 1.7px 4px 0 rgba(0, 0, 0, 0.15);
+  .logo {line-height:1;    
+    a{width:475px;height:29px;background: url(../images/logo.png) 0 0 / contain no-repeat;@include m.f_blind;}
+  }
+}
+.page {
+  flex:1;
+  display:flex;flex-direction:column;
+  &-tit{
+    padding:15px v.$sectiongap;
+    border-bottom:1px solid v.$border-layout;
+    h2{@include m.flex;gap:10px;font-size:v.$text-size-2xl;padding:2px 0;}
+  }
+  &-desc{font-size:v.$text-size-md;color:v.$gray-900;}
+  &-body{flex:1;background-color:#fff;padding-bottom:v.$maingap;}
+  &-wrap{padding:0 v.$sectiongap;overflow:hidden;}
+  &-actions{
+    @include m.actions;
+    margin-top:v.$maingap;
+    &-left{margin-right:auto;}
+  }
+  &-footer {
+    height:v.$footer-height;
+    margin-top:auto;
+    background:#efeff0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    padding:0 v.$sectiongap;
+    font-size: v.$text-size-sm;  
+    color: v.$black-500;
+    border-top:1px solid v.$border-layout;
+  }
+}
+
+.dashboard{
+  .page{
+    &-tit{border-bottom-width:0;padding-bottom:0;}
+    &-body,&-footer{background-color:transparent;}
+  }
+}
+
+
+// ============================================
+// Flex Layouts
+// ============================================
+
+.flex{
+  &-wrap {
+    @include m.flex($align: stretch);
+    
+    & > :is(div, section) {
+      flex: 1 0;
+      position: relative;
+    }
+  }
+
+  &-vertical_wrap {
+    @include m.flex($align: stretch, $direction: column) {
+      gap: v.$maingap;
+    }
+  }
+
+}
+
+// ============================================
+// Search Section
+// ============================================
+
+.search {
+  @include m.actions;
+  border-bottom:1px solid v.$border-layout;
+  &-lst,
+  &-form {
+    @include m.flex;
+    gap:24px;
+  }
+  &-lst{
+    flex-wrap: wrap;
+    padding:13px 0;
+    li{display:flex;align-items:center;gap:8px;}
+    label{
+      white-space:nowrap;
+      &::before{@include m.shape(3px,3px);border-radius:50%;background-color:v.$gray-900;margin-right:4px;vertical-align:middle;}
+    }
+  }
+  .tool{padding:13px 0;}
+}
+
+// ============================================
+// section
+// ============================================
+.section{
+  &-tit{
+    @include m.flex;
+    gap: 9px;
+    color: v.$black-800;
+    font-size:v.$text-size-lg;
+    margin-bottom:10px;
+    font-weight:700;
+    &::before {
+      @include m.shape(4px, 4px);
+      background-color: v.$black-800;
+      border-radius: 50%;
+    }
+  }
+}
+
+.tool,
+.divide {
+  @include m.flex;
+  gap: v.$gap-sm;
+}
+.tool{margin-left:auto;}
+.divide{@include m.divide;}
+
+// ============================================
+// Empty State
+// ============================================
+
+[data-empty]:empty {
+  @include m.flex($align: center, $justify: center);
+  height: 100%;
+  background-color: v.$bg-default;
+  font-size: v.$input-font-size;
+  gap: 13px;
+  
+  &::before {
+    @include m.fontello('\e877');
+    color: #b1c0d0;
+    font-size: 22px;
+  }
+  
+  &::after {
+    content: attr(data-empty);
+    color: v.$mute-blue;
+  }
+}
+
+// Linked Top Section
+.linked {
+  &-top{
+    &::before {
+      @include m.fontello('\e892');
+      display: block;
+      width: 65px;
+      font-size: v.$icon-size-xl;
+      text-align: center;
+      margin: 0 auto;
+      color: #92a4b8;
+      border: 1px solid #c6d6e7;
+      border-radius: v.$spacing-md;
+      padding: v.$spacing-sm v.$spacing-2xl;
+    }
+    & > .tbl_wrap {
+      margin-top: v.$spacing-2xl;
+    }
+  }  
+}

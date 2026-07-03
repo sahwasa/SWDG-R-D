@@ -1,0 +1,18 @@
+# Node
+node_modules/
+
+# deploy
+publish*.zip
+
+# 임시 파일
+**/*_tmp*
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+
+# 하지만 Font와 Plugin은 Git에 포함!
+!dist/font/
+!dist/plugins/

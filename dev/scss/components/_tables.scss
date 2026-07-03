@@ -1,0 +1,159 @@
+@use "./abstracts/var" as v;
+@use "./abstracts/mixin" as m;
+
+// ============================================
+// Table
+// ============================================
+
+:root{
+  --table-padding:7px;
+  --table-border-color:#e2e2e2;
+  --table-th-font-size: 14px;
+  --table-th-bg: #f4f6ff;
+  --table-th-border-color: #9dabf3;
+  --table-height: 453px;
+}
+// 기본 테이블
+.tbl {
+  width: 100%;
+  text-align: center;
+  background-color: v.$white;
+
+  &--hover tr:hover {
+    cursor: pointer;
+    background-color:#F6F7FC;
+  }
+
+  thead {
+    position: sticky;
+    top: 0;
+    left: 0;
+    background-color:#fff;
+    z-index:v.$z-sticky;
+
+    &::after {
+      @include m.shape(100%, 0);
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      border-bottom: 1px solid var(--table-th-border-color);
+    }
+  }
+
+  tbody tr {
+    border-bottom: 1px solid var(--table-border-color);
+    &:last-of-type{border-bottom-width:0;}
+    &.is-editing td:has(input,select){
+      padding:2px;
+      input:not(.auto-width){
+        width: 100%;
+        max-width: 100%;
+      }
+    }
+  }
+
+  th,
+  td {
+    padding: var(--table-padding);
+  }
+
+  th {
+    color:#101010;
+    font-size: var(--table-th-font-size);
+    font-weight:600;
+    background-color: var(--table-th-bg);
+    word-break:keep-all;
+  }
+  &__th-action{text-align:right;white-space:nowrap;}
+
+  td {position:relative;
+    &:has(.badge) {text-align:left;text-indent:15%;
+      .badge{text-indent:0;}
+    }
+    &:has(.txt-ellipsis) {text-align:left;white-space:nowrap;}
+    span+button{margin-left:10px;}
+  }  
+  button{@extend %btn-size--sm;}
+  
+
+}
+// 상세 테이블
+.tbl-detail{
+  thead::after{border-bottom:2px solid v.$primary;}
+  th{background-color:#fff;}
+  td:last-child:has(button){text-align:right;white-space:nowrap;}
+}
+.tbl-sub{
+  thead::after{border-bottom:2px solid v.$gray-900;}
+  th{background-color:#fff;}
+  td{
+    &:last-child:has(button){text-align:right;white-space:nowrap;}
+  }
+  button{@extend %btn-size--xs;}
+}
+
+// 폼 입력 테이블
+.tbl-form {
+  width: 100%;
+  border: 1px solid v.$gray-300;
+  border-width: 1px 0;
+  text-align: left;
+
+  tr:not(:first-of-type) :is(th, td) {
+    border-top: 1px solid var(--table-border-color);
+  }
+
+  th {
+    background-color: v.$bg-light;
+  }
+
+  th,
+  td {
+    padding: v.$spacing-md;
+  }
+}
+
+// ============================================
+// Table Layout
+// ============================================
+
+// 헤더
+.tbl-header {
+  @include m.actions;;
+  margin: 12px 0;
+  font-size: v.$input-font-size;
+  min-height:34px;
+
+  .info {
+    @include m.explanation;
+  }
+ 
+  &__count{@include m.flex;gap:10px;
+    em{color:#000;font-size:v.$text-size-lg;letter-spacing:-.4px;}
+  }
+}
+
+// 푸터
+.tbl-footer {
+  @include m.flex;
+  padding: v.$spacing-xl v.$spacing-4xl;
+  border-bottom: 1px solid v.$border-ipt;
+  background-color: v.$white;
+
+  .device_result {
+    margin-left: auto;
+    gap: 60px;
+  }
+}
+
+// 래퍼
+.tbl-wrap {
+  border-top: 1px solid v.$primary;
+  border-bottom: 1px solid var(--table-border-color);
+  background-color: v.$gray-100;
+  overflow-y: auto;  
+
+  tr:is(td:first-of-type:has(:checked), .on) {
+    background-color: v.$bg-soft;
+  }
+}

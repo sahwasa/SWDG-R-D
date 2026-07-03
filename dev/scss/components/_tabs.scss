@@ -1,0 +1,32 @@
+@use "./abstracts/var" as v;
+@use "./abstracts/mixin" as  m;
+
+// ============================================
+// Tabs
+// ============================================
+
+.tabs {  
+  &__list {
+    @include m.flex;
+    gap: v.$gap-xs;    
+    border:1px solid #9dabf3;
+    border-width:1px 0;    
+  }
+  &__btn {
+    min-width: 100px;
+    height:40px;
+    color:v.$gray-900;
+    font-weight:600;
+  }
+  .is-active{color:v.$primary;
+    background-color:v.$primary-light;
+  }
+  
+  &__panel{padding-top:10px;
+    &:has(> .tbl-wrap:first-child){padding-top:0;}
+    &-top{@include m.flex($justify:flex-end);margin-bottom:10px;padding:0 10px;
+      button{padding:5px 11px;}
+    }
+    .tbl-wrap{border-top-width:0;}
+  }
+}

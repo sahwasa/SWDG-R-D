@@ -1,0 +1,560 @@
+@@include('inc/top.html')
+<div id="wrap" class="wrap">
+  @@include('inc/header.html')
+  <div class="container">
+    @@include('inc/navigation.html')    
+    <main id="content" class="page">
+      <header class="page-tit">
+        <h2>모델관리 상세</h2>
+        <p class="page-desc">모델 상세 내용을 확인하실 수 있습니다.</p>        
+      </header>
+      <div class="page-body model-view">
+        <div class="detail-wrap">
+          <!-- 평소 (뷰모드) -->
+          <form>
+            <dl class="detail-list page-wrap">
+              <div>
+                <dt><label for="modelName">모델명</label></dt>
+                <dd><input type="text" id="modelName" value="ASSA" disabled /></dd>
+
+                <dt><label for="modelAlias">모델약칭</label></dt>
+                <dd><input type="text" id="modelAlias" value="ASSA" disabled /></dd>
+
+                <dt><label for="category">분야</label></dt>
+                <dd>
+                  <select id="category" title="분야" class="auto-width" disabled>
+                    <option value="">태양점촉발</option>
+                  </select>
+                </dd>
+
+                <dt><label for="baseDay">자료기준일</label></dt>
+                <dd>
+                  <select id="baseDay" title="자료기준일" class="auto-width" disabled>
+                    <option value="0">0</option>
+                  </select>
+                  <span>일전 (모델 생성 기준일)</span>
+                </dd>
+
+                <dt><label for="useYn">사용여부</label></dt>
+                <dd>
+                  <select id="useYn" title="사용여부" class="auto-width" disabled>
+                    <option value="">미사용</option>
+                  </select>
+                </dd>
+              </div>
+
+              <div class="is-full">
+                <dt><label for="reason">사유</label></dt>
+                <dd><input type="text" id="reason" value="사유" disabled /></dd>
+              </div>
+
+              <div class="is-full">
+                <dt><label for="desc">설명</label></dt>
+                <dd><textarea id="desc" rows="3" disabled>태양활동을 자동으로 인식하고 태양 흑점폭발 확률정보 제공</textarea></dd>
+              </div>
+            </dl>  
+            <div class="detail-list__actions page-wrap">
+              <a class="btn--secondary" href="model-list.html">목록</a>
+              <button type="submit" class="btn--primary">수정</button>
+            </div>            
+          </form>
+          <!-- 평소 (뷰모드)__e -->
+          
+          <!-- 수정모드 -->
+          <!-- <form>
+            <dl class="detail-list page-wrap">
+              <div>
+                <dt><label for="modelName">모델명</label></dt>
+                <dd><input type="text" id="modelName" value="ASSA"></dd>
+
+                <dt><label for="modelAlias">모델약칭</label></dt>
+                <dd><input type="text" id="modelAlias" value="ASSA"></dd>
+
+                <dt><label for="category">분야</label></dt>
+                <dd>
+                  <select id="category" title="분야" class="auto-width">
+                    <option value="">태양점촉발</option>
+                  </select>
+                </dd>
+
+                <dt><label for="baseDay">자료기준일</label></dt>
+                <dd>
+                  <select id="baseDay" title="자료기준일" class="auto-width">
+                    <option value="0">0</option>
+                  </select>
+                  <span>일전 (모델 생성 기준일)</span>
+                </dd>
+
+                <dt><label for="useYn">사용여부</label></dt>
+                <dd>
+                  <select id="useYn" title="사용여부" class="auto-width">
+                    <option value="">미사용</option>
+                  </select>
+                </dd>
+              </div>
+
+              <div class="is-full">
+                <dt><label for="reason">사유</label></dt>
+                <dd><input type="text" id="reason" value="사유"></dd>
+              </div>
+
+              <div class="is-full">
+                <dt><label for="desc">설명</label></dt>
+                <dd><textarea id="desc" rows="3">태양활동을 자동으로 인식하고 태양 흑점폭발 확률정보 제공</textarea></dd>
+              </div>
+            </dl>  
+            <div class="detail-list__actions page-wrap">
+              <button type="button" class="btn--secondary">취소</button>
+              <button type="submit" class="btn--primary">저장</button>
+              <span class="divide">
+                <button type="submit" class="btn--danger">완전삭제</button>
+              </span>
+            </div>            
+          </form> -->
+          <!-- 수정모드__e -->
+        </div>
+        <div class="page-wrap">
+          <div class="tabs">
+            <div class="tabs__list" role="tablist">
+              <button type="button" class="tabs__btn is-active" role="tab" id="tab-first" aria-selected="true" aria-controls="panel-first">최초자료</button>
+              <button type="button" class="tabs__btn" role="tab" id="tab-model" aria-selected="false" aria-controls="panel-model" tabindex="-1">모델정보</button>
+              <button type="button" class="tabs__btn" role="tab" id="tab-last" aria-selected="false" aria-controls="panel-last" tabindex="-1">최종자료</button>
+              <button type="button" class="tabs__btn" role="tab" id="tab-dev" aria-selected="false" aria-controls="panel-dev" tabindex="-1">개발정보</button>
+              <button type="button" class="tabs__btn" role="tab" id="tab-manager" aria-selected="false" aria-controls="panel-manager" tabindex="-1">담당자정보</button>
+            </div>
+
+            <div class="tabs__panel" role="tabpanel" id="panel-first" aria-labelledby="tab-first">
+              <!-- 최초자료 내용 -->
+              <div class="tbl-wrap">
+                <table class="tbl tbl-detail">
+                  <caption>최초자료 목록</caption>
+                  <colgroup>
+                    <col style="width:100px;" />
+                    <col style="width:150px;" span="2" />
+                    <col span="2" />
+                    <col style="width:100px;" />
+                  </colgroup>
+                  <thead>
+                    <tr>
+                      <th scope="col">NO.</th>
+                      <th scope="col">시스템 IP</th>
+                      <th scope="col">시스템명</th>
+                      <th scope="col">파일위치</th>
+                      <th scope="col">파일명</th>
+                      <th class="tbl__th-action">
+                        <button type="button" class="btn--light" aria-label="최초자료 추가">추가</button>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- 평소 (뷰모드) -->
+                    <tr>
+                      <td>10</td>
+                      <td><span class="txt-ellipsis">192.168.31.45</span></td>
+                      <td><span class="txt-ellipsis">Model_DEV_01</span></td>
+                      <td><span class="txt-ellipsis">/mmt/Collect_Data/SWDG_DATA/MDL/ETC/HAL/10TH/[yyy]/[mm]/[dd]</span></td>
+                      <td><span class="txt-ellipsis">[yyy][mm][dd][hh]0010.jpg</span></td>
+                      <td>
+                        <button type="button" class="btn--outline-primary btn-edit">수정</button>
+                        <button type="button" class="btn--outline-danger">삭제</button>
+                      </td>
+                    </tr>
+
+                    <!-- 수정 클릭 시 (is-editing 붙이고 값 교체) -->
+                    <tr class="is-editing">
+                      <td>10</td>
+                      <td><input type="text" aria-label="시스템 IP" value="192.168.31.45"></td>
+                      <td><input type="text" aria-label="시스템명" value="Model_DEV_01"></td>
+                      <td><input type="text" aria-label="파일위치" value="/mmt/Collect_Data/SWDG_DATA/MDL/ETC/HAL/10TH/[yyy]/[mm]/[dd]"></td>
+                      <td><input type="text" aria-label="파일명" value="[yyy][mm][dd][hh]0010.jpg"></td>
+                      <td>
+                        <button type="button" class="btn--outline-primary btn-save">저장</button>
+                        <button type="button" class="btn--secondary btn-cancel">취소</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="tabs__panel" role="tabpanel" id="panel-model" aria-labelledby="tab-model" hidden>
+              <!-- 모델정보 내용 -->
+              <div class="tabs__panel-top">
+                <button type="button" class="btn--light" id="btnAddForm">추가</button>
+              </div>
+              <!-- 폼 1개 단위 (반복되는 블록) -->
+              <form>
+                <div class="model-detail__wrap">
+                  <fieldset class="detail-list">
+                    <legend>기본정보</legend>
+                    <div>
+                      <dt><label for="source-1">소스</label></dt>
+                      <dd><input type="text" id="source-1" value="ASSA"></dd>
+
+                      <dt><label for="cycle-1">실행주기</label></dt>
+                      <dd><input type="text" id="cycle-1" value="ASSA"></dd>
+
+                      <dt><label for="baseDay-1">기준일</label></dt>
+                      <dd class="is-flex05">
+                        <select id="baseDay-1" title="기준일">
+                          <option value="0">0</option>
+                          <option value="10">10</option>
+                        </select>
+                        <span>일전</span>
+                      </dd>
+
+                      <dt><label for="serverIp-1">서버IP</label></dt>
+                      <dd><input type="text" id="serverIp-1" value="192.168.31.45"></dd>
+
+                      <dt><label for="path-1">위치</label></dt>
+                      <dd class="is-flex2"><input type="text" id="path-1" value="/mmt/Collect_Data/SWDG_DATA/MDL/ETC/HAL/10TH"></dd>
+                    </div>
+
+                    <div>
+                      <dt><label for="reason1-1">설명
+                      
+                      </label></dt>
+                      <dd><input type="text" id="reason1-1" value="설명
+                      
+                      "></dd>
+
+                      <dt><label for="reason2-1">로그위치</label></dt>
+                      <dd><input type="text" id="reason2-1" value="로그위치"></dd>
+                    </div>
+
+                    <div class="is-full">
+                      <dt><label for="restartMethod-1">재구동방법</label></dt>
+                      <dd><input type="text" id="restartMethod-1"></dd>
+                    </div>
+                  </fieldset>
+
+                  <fieldset class="tbl-section">
+                    <legend>입력자료</legend>                    
+                    <div class="tbl-wrap">
+                      <table class="tbl tbl-sub">
+                        <caption>모델정보 입력자료</caption>
+                        <colgroup>
+                          <col style="width:80px;" />
+                          <col span="2" />
+                          <col style="width:100px;" />
+                        </colgroup>
+                        <thead>
+                          <tr>
+                            <th scope="col">NO.</th>
+                            <th scope="col">파일위치</th>
+                            <th scope="col">파일명</th>
+                            <th class="tbl__th-action">
+                              <button type="button" class="btn--soft-light" aria-label="최초자료 추가">추가</button>
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <!-- 수정 클릭 시 (is-editing 붙이고 값 교체) -->
+                          <tr class="is-editing">
+                            <td>2</td>
+                            <td><input type="text" value="/mmt/Collect_Data/SWDG_DATA/MDL/ETC/HAL/10TH/[yyy]/[mm]/[dd]"></td>
+                            <td><input type="text" value="[yyy][mm][dd][hh]0010.jpg"></td>
+                            <td>
+                              <button type="button" class="btn--soft-primary">저장</button>
+                              <button type="button" class="btn--soft-secondary">취소</button>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>1</td>
+                            <td><span class="txt-ellipsis">/mmt/Collect_Data/SWDG_DATA/MDL/ETC/HAL/10TH/[yyy]/[mm]/[dd]</span></td>
+                            <td><span class="txt-ellipsis">[yyy][mm][dd][hh]0010.jpg</span></td>
+                            <td>
+                              <button type="button" class="btn--soft-secondary">수정</button>
+                              <button type="button" class="btn--soft-danger">삭제</button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </fieldset>
+
+                  <fieldset class="tbl-section">
+                    <legend>결과자료</legend>                    
+                    <div class="tbl-wrap">
+                      <table class="tbl tbl-sub">
+                        <caption>모델정보 결과자료</caption>
+                        <colgroup>
+                          <col style="width:80px;" />
+                          <col span="2" />
+                          <col style="width:100px;" />
+                        </colgroup>
+                        <thead>
+                          <tr>
+                            <th scope="col">NO.</th>
+                            <th scope="col">파일위치</th>
+                            <th scope="col">파일명</th>
+                            <th class="tbl__th-action">
+                              <button type="button" class="btn--soft-light" aria-label="최초자료 추가">추가</button>
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>2</td>
+                            <td><span class="txt-ellipsis">/mmt/Collect_Data/SWDG_DATA/MDL/ETC/HAL/10TH/[yyy]/[mm]/[dd]</span></td>
+                            <td><span class="txt-ellipsis">[yyy][mm][dd][hh]0010.jpg</span></td>
+                            <td>
+                              <button type="button" class="btn--soft-secondary">수정</button>
+                              <button type="button" class="btn--soft-danger">삭제</button>
+                            </td>
+                          </tr>
+                          <tr class="is-editing">
+                            <td>1</td>
+                            <td><input type="text" aria-label="파일위치" value="/mmt/Collect_Data/SWDG_DATA/MDL/ETC/HAL/10TH/[yyy]/[mm]/[dd]" /></td>
+                            <td><input type="text" aria-label="파일명" value="[yyy][mm][dd][hh]0010.jpg" /></td>
+                            <td>
+                              <button type="button" class="btn--soft-primary">저장</button>
+                              <button type="button" class="btn--soft-secondary">취소</button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </fieldset>
+                </div>
+                <div class="model-detail__actions">
+                  <button type="submit" class="btn--outline-primary">수정</button>
+                  <button type="button" class="btn--outline-danger">삭제</button>
+                </div>
+              </form>
+              <!-- "추가" 클릭 시 위 form 블록이 통째로 하나 더 추가됨 -->
+            </div>
+            <div class="tabs__panel" role="tabpanel" id="panel-last" aria-labelledby="tab-last" hidden>
+              <!-- 최종자료 내용 -->
+              <div class="tbl-wrap">
+                <table class="tbl tbl-detail">
+                  <caption>최종자료 목록</caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">NO.</th>
+                      <th scope="col">시스템 IP</th>
+                      <th scope="col">시스템명</th>
+                      <th scope="col">파일위치</th>
+                      <th scope="col">파일명</th>
+                      <th class="tbl__th-action">
+                        <button type="button" class="btn--light" aria-label="최초자료 추가">추가</button>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- 평소 (뷰모드) -->
+                    <tr>
+                      <td>10</td>
+                      <td><span class="txt-ellipsis">192.168.31.45</span></td>
+                      <td><span class="txt-ellipsis">Model_DEV_01</span></td>
+                      <td><span class="txt-ellipsis">/mmt/Collect_Data/SWDG_DATA/MDL/ETC/HAL/10TH/[yyy]/[mm]/[dd]</span></td>
+                      <td><span class="txt-ellipsis">[yyy][mm][dd][hh]0010.jpg</span></td>
+                      <td>
+                        <button type="button" class="btn--outline-primary btn-edit">수정</button>
+                        <button type="button" class="btn--outline-danger">삭제</button>
+                      </td>
+                    </tr>
+
+                    <!-- 수정 클릭 시 (is-editing 붙이고 값 교체) -->
+                    <tr class="is-editing">
+                      <td>10</td>
+                      <td><input type="text" aria-label="시스템 IP" value="192.168.31.45"></td>
+                      <td><input type="text" aria-label="시스템명" value="Model_DEV_01"></td>
+                      <td><input type="text" aria-label="파일위치" value="/mmt/Collect_Data/SWDG_DATA/MDL/ETC/HAL/10TH/[yyy]/[mm]/[dd]"></td>
+                      <td><input type="text" aira-label="파일명" value="[yyy][mm][dd][hh]0010.jpg"></td>
+                      <td>
+                        <button type="button" class="btn--outline-primary btn-save">저장</button>
+                        <button type="button" class="btn--secondary btn-cancel">취소</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="tabs__panel" role="tabpanel" id="panel-dev" aria-labelledby="tab-dev" hidden>
+              <!-- 개발정보 내용 -->
+              <div class="tabs__panel-top">
+                <button type="button" class="btn--light" id="btnAddForm">추가</button>
+              </div>
+              <!-- 폼 1개 단위 (반복되는 블록) -->
+              <form>
+                <div class="model-detail__wrap">
+                  <fieldset class="tbl-section">
+                    <legend>개발정보</legend>                    
+                    <div class="tbl-wrap">
+                      <table class="tbl tbl-sub">
+                        <caption>개발정보 목록</caption>
+                        <thead>
+                          <tr>
+                            <th scope="col">개발년도</th>
+                            <th scope="col">개발업체</th>
+                            <th scope="col">개발언어</th>
+                            <th scope="col">개발내용</th>
+                            <th class="tbl__th-action">
+                              <button type="button" class="btn--soft-light" aria-label="최초자료 추가">추가</button>
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <!-- 수정 클릭 시 (is-editing 붙이고 값 교체) -->
+                          <tr class="is-editing">
+                            <td>
+                              <select name="" id="" aria-label="개발년도 선택">
+                                <option value="">2014</option>
+                                <option value="">2013</option>
+                                <option value="">2012</option>
+                              </select>
+                            </td>
+                            <td><input type="text" aria-label="개발언어" value="IDL"></td>
+                            <td><input type="text" aria-lable="개발업체" value="에스이랩"></td>
+                            <td><input type="text" aria-lable="개발내용" value="필라멘트, 코로나홀 분석"></td>
+                            <td>
+                              <button type="button" class="btn--soft-primary">저장</button>
+                              <button type="button" class="btn--soft-secondary">취소</button>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>2012</td>
+                            <td><span class="txt-ellipsis">에스이랩</span></td>
+                            <td><span class="txt-ellipsis">IDL</span></td>
+                            <td><span class="txt-ellipsis">최초개발</span></td>
+                            <td>
+                              <button type="button" class="btn--soft-secondary">수정</button>
+                              <button type="button" class="btn--soft-danger">삭제</button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </fieldset>
+                  
+                  <fieldset class="attach-section">
+                    <legend>참고파일</legend>                   
+                    <div id="file-upload1" class="file-upload"></div>
+                  </fieldset>
+
+                  <fieldset class="tbl-section">
+                    <legend>수정내용</legend>
+                    <div class="tbl-wrap">
+                      <table class="tbl tbl-sub">
+                        <caption>수정내용 목록</caption>
+                        <colgroup>
+                          <col style="width:150px;" />
+                          <col />
+                          <col style="width:100px;" />
+                        </colgroup>
+                        <thead>
+                          <tr>
+                            <th scope="col">등록일자</th>
+                            <th scope="col">수정내용</th>
+                            <th class="tbl__th-action">
+                              <button type="button" class="btn--soft-light" aria-label="최초자료 추가">추가</button>
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr class="is-editing">                            
+                            <td><input type="text" aria-label="등록일자" value="2026-06-05" readonly></td>
+                            <td><input type="text" aria-label="수정내용" value="등록일자는 자동으로 들어갑니까?"></td>
+                            <td>
+                              <button type="button" class="btn--soft-primary">저장</button>
+                              <button type="button" class="btn--soft-secondary">취소</button>
+                            </td>
+                          </tr>                      
+                          <tr>
+                            <td>2026-06-01</td>
+                            <td><span class="txt-ellipsis">01 assaUpdate_2.sh 실행주기를 매시간 38분으로 변경</span></td>
+                            <td>
+                              <button type="button" class="btn--soft-secondary">수정</button>
+                              <button type="button" class="btn--soft-danger">삭제</button>
+                            </td>
+                          </tr>                      
+                        </tbody>
+                      </table>
+                    </div>
+                  </fieldset>
+                </div>                  
+              </form>
+              <!-- "추가" 클릭 시 위 form 블록이 통째로 하나 더 추가됨 -->
+            </div>
+            <div class="tabs__panel" role="tabpanel" id="panel-manager" aria-labelledby="tab-manager" hidden>
+              <!-- 담당자정보 내용 -->
+              <div class="tbl-wrap">
+                <table class="tbl tbl-detail">
+                  <caption>담당자 목록</caption>
+                  <colgroup>
+                    <col style="width:100px;"/>
+                    <col span="2" />
+                    <col style="width:150px;"/>
+                    <col style="width:100px;"/>
+                  </colgroup>
+                  <thead>
+                    <tr>
+                      <th scope="col">NO.</th>
+                      <th scope="col">담당자명</th>
+                      <th scope="col">내선번호</th>
+                      <th scope="col">등록일자</th>
+                      <th class="tbl__th-action">
+                        <button type="button" class="btn--light" aria-label="최초자료 추가">추가</button>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- 평소 (뷰모드) -->
+                    <tr>
+                      <td>10</td>
+                      <td>홍길동</td>
+                      <td>064-123-4567</td>
+                      <td>2026-01-01</td>
+                      <td>
+                        <button type="button" class="btn--outline-primary btn-edit">수정</button>
+                        <button type="button" class="btn--outline-danger">삭제</button>
+                      </td>
+                    </tr>
+
+                    <!-- 수정 클릭 시 (is-editing 붙이고 값 교체) -->
+                    <tr class="is-editing">
+                      <td>10</td>
+                      <td><input type="text" aria-label="담당자명" value="하츄핑"></td>
+                      <td><input type="text" aria-label="내선번호" value="064-123-4568"></td>
+                      <td><input type="text" aria-label="등록일자" value="2026-05-05" readonly /></td>
+                      <td>
+                        <button type="button" class="btn--outline-primary btn-save">저장</button>
+                        <button type="button" class="btn--secondary btn-cancel">취소</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>                   
+        </div>
+      </div>      
+    </main>  
+  </div>
+  @@include('inc/footer.html')
+</div>
+<script src="../js/fileUpload.js"></script>
+<script>
+ const uploader1 = new FileUpload('#file-upload1', {
+  accept: ['.pdf', '.doc', '.xls', '.txt'],
+  maxSize: 10,
+  multiple: true,
+  initialFiles: [
+    { id: 101, name: '기획서.pdf', size: 204800, url: '/files/101' },
+    { id: 102, name: '견적서.docx', size: 51200, url: '/files/102' },
+  ],
+  onRemoveExisting: (file) => {
+    // 서버에 삭제 요청, 실패 시 목록 롤백 등
+    api.deleteFile(file.id);
+  },
+  onAdd: (files) => console.log('추가됨', files),
+  onRemove: (file) => console.log('제거됨', file),
+  onError: ({ type, message }) => alert(message),
+});
+</script>
+<script type="module">
+  import { initTabs } from '../js/tabs.js';
+  initTabs();
+</script>
+</body>
+</html>

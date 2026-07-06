@@ -306,12 +306,12 @@ progress::-webkit-progress-bar {
   line-height: 1;
 }
 .header .logo a {
-  width: 200px;
-  height: 91px;
-  background: url(../images/logo.png) 0 0/contain no-repeat;
-  font-size: 0 !important;
-  line-height: 0;
-  overflow: hidden;
+  background: url(../images/logo.png) 0 0 no-repeat;
+  font-size: 27px;
+  color: #000;
+  letter-spacing: -0.05em;
+  padding-top: 36px;
+  font-weight: 700;
 }
 .header_container {
   position: relative;
@@ -321,6 +321,7 @@ progress::-webkit-progress-bar {
   flex-direction: column;
   left: 0;
   padding: 30px;
+  gap: 50px;
   transition: left 0.3s ease;
 }
 
@@ -554,7 +555,6 @@ progress::-webkit-progress-bar {
 }
 
 .nav {
-  width: 300px;
   padding: 20px 0;
 }
 .nav h1 {

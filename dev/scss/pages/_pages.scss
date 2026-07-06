@@ -10,7 +10,7 @@
 .model-list{
   @include m.flex($direction:column,$align:stretch);
   .page-wrap:has(.tbl-wrap){flex:1;}
-  .tbl-wrap{max-height: calc(100vh - 375px);height:stretch;}
+  .tbl-wrap{max-height: calc(100vh - 295px);height:stretch;}
 }
 
 // ==========================================================================

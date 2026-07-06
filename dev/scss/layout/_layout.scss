@@ -6,29 +6,37 @@
 // ============================================
 
 .wrap {
-  @include m.flex($direction:column,$align:stretch);
+  // @include m.flex($direction:column,$align:stretch);
+  @include m.flex($align:stretch);flex:1;
   height:stretch;
   min-width: v.$mainwidth;
   min-height: 100vh;
   font-size: v.$btn-font-size;
 }
 
-.container{
-  @include m.flex($align:stretch);flex:1;
-}
 // ============================================
 // Header
 // ============================================
 .header {
   position: relative; 
-  @include m.flex;  
-  height:v.$header-height;
+  width:v.$lnb-width;
   z-index: v.$z-header;
   background-color:#fff;  
-  border-bottom:1px solid v.$border-layout;  
+  border-right:1px solid v.$border-layout;  
   box-shadow: 1px 1.7px 4px 0 rgba(0, 0, 0, 0.15);
+  transition: width .3s ease;
   .logo {line-height:1;    
-    a{width:475px;height:29px;background: url(../images/logo.png) 0 0 / contain no-repeat;@include m.f_blind;}
+    a{width:200px;height:91px;background: url(../images/logo.png) 0 0 / contain no-repeat;@include m.f_blind;}
+  }
+  &_container{
+    position:relative;
+    width:v.$lnb-width;
+    height:100%;
+    display: flex;
+    flex-direction: column;
+    left:0;
+    padding:v.$maingap;
+    transition: left .3s ease;
   }
 }
 .page {
@@ -50,10 +58,9 @@
   &-footer {
     height:v.$footer-height;
     margin-top:auto;
-    background:#efeff0;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
     flex-shrink: 0;
     padding:0 v.$sectiongap;
     font-size: v.$text-size-sm;  

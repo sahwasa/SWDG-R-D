@@ -285,43 +285,43 @@ progress::-webkit-progress-bar {
   display: flex;
   justify-content: flex-start;
   align-items: stretch;
-  flex-direction: column;
+  flex-direction: row;
+  flex: 1;
   height: stretch;
   min-width: 1440px;
   min-height: 100vh;
   font-size: 13px;
 }
 
-.container {
-  display: flex;
-  justify-content: flex-start;
-  align-items: stretch;
-  flex-direction: row;
-  flex: 1;
-}
-
 .header {
   position: relative;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-direction: row;
-  height: 80px;
+  width: 300px;
   z-index: 100;
   background-color: #fff;
-  border-bottom: 1px solid #d2d2d2;
+  border-right: 1px solid #d2d2d2;
   box-shadow: 1px 1.7px 4px 0 rgba(0, 0, 0, 0.15);
+  transition: width 0.3s ease;
 }
 .header .logo {
   line-height: 1;
 }
 .header .logo a {
-  width: 475px;
-  height: 29px;
+  width: 200px;
+  height: 91px;
   background: url(../images/logo.png) 0 0/contain no-repeat;
   font-size: 0 !important;
   line-height: 0;
   overflow: hidden;
+}
+.header_container {
+  position: relative;
+  width: 300px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  left: 0;
+  padding: 30px;
+  transition: left 0.3s ease;
 }
 
 .page {
@@ -374,10 +374,9 @@ progress::-webkit-progress-bar {
 .page-footer {
   height: 60px;
   margin-top: auto;
-  background: #efeff0;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   flex-shrink: 0;
   padding: 0 50px;
   font-size: 12px;
@@ -556,8 +555,13 @@ progress::-webkit-progress-bar {
 
 .nav {
   width: 300px;
-  border-right: 1px solid #d2d2d2;
   padding: 20px 0;
+}
+.nav h1 {
+  font-size: 22px;
+  line-height: 1;
+  margin-bottom: 15px;
+  color: #000000;
 }
 .nav__list a {
   color: #777;
@@ -570,7 +574,7 @@ progress::-webkit-progress-bar {
   align-items: center;
   gap: 10px;
   font-weight: 700;
-  padding: 10px 30px;
+  padding: 10px 0;
   font-size: 18px;
   border-radius: 8px;
 }
@@ -615,55 +619,44 @@ progress::-webkit-progress-bar {
 .nav__sublist a:is(.is-active, :hover, :focus)::before {
   background: url(../../images/ico.png)-57px 0 no-repeat;
 }
-
-.bredcrumb {
-  margin-left: auto;
+.nav__footer {
+  margin-top: auto;
+  color: #555555;
+  font-size: 12px;
+  letter-spacing: -0.13px;
+  white-space: nowrap;
+  align-self: center;
 }
-.bredcrumb ul {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-direction: row;
-}
-.bredcrumb li {
-  color: #888;
-  letter-spacing: -0.65px;
-}
-.bredcrumb li:first-child {
+.nav-toggle {
+  position: absolute;
+  top: 55px;
+  right: -20px;
   font-size: 0 !important;
   vertical-align: middle;
   line-height: 1;
   color: inherit;
 }
-.bredcrumb li:first-child::before {
+.nav-toggle::before {
   display: inline-block;
   content: "";
   overflow: hidden;
   font-size: 0;
-  width: 12px;
-  height: 12px;
-  background: url(../images/ico.png) 0 -84px no-repeat;
+  width: 40px;
+  height: 40px;
+  background: url(../images/btn.png) 0 -211px no-repeat;
   vertical-align: text-top;
 }
-.bredcrumb li:first-child:hover {
+.nav-toggle:hover {
   filter: contrast(130%);
 }
-.bredcrumb li:first-child a {
-  font-size: 0 !important;
-  line-height: 0;
-  overflow: hidden;
+#header.is-collapsed {
+  width: 30px;
 }
-.bredcrumb li:last-child {
-  color: #000;
+#header.is-collapsed .nav-toggle::before {
+  background-position-y: -170px;
 }
-.bredcrumb li::before {
-  display: inline-block;
-  font-family: "fontello";
-  font-weight: normal;
-  content: "\f105";
-  line-height: 1;
-  margin: 0 8px;
-  color: #888;
+#header.is-collapsed .header_container {
+  left: -270px;
 }
 
 select,
@@ -1871,7 +1864,7 @@ legend {
   flex: 1;
 }
 .model-list .tbl-wrap {
-  max-height: calc(100vh - 375px);
+  max-height: calc(100vh - 295px);
   height: stretch;
 }
 

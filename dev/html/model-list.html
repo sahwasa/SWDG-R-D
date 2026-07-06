@@ -1,103 +1,99 @@
 @@include('inc/top.html')
 <div id="wrap" class="wrap">
-  @@include('inc/header.html')
-  <div class="container">
-    @@include('inc/navigation.html')    
-    <main id="content" class="page">
-      <header class="page-tit">
-        <h2>모델관리</h2>
-        <p class="page-desc">모델을 조회하고 관리할 수 있습니다.</p>        
-      </header>
-      <div class="page-body model-list">
-        <div class="page-wrap search">
-          <form action="" class="search-form">            
-            <ul class="search-lst">                
-              <li>
-                <label for="">모델</label>
-                <input type="text" placeholder="모델명 및 모델약칭 입력" title="모델">
-              </li>
-              <li>
-                <label for="collectYn">분야</label>
-                <select name="" id="collectYn" title="분야">
-                  <option value="">전체</option>
-                  <option value="">태양흑점폭발</option>
-                </select>
-              </li>
-              <li>
-                <label for="">사용여부</label>
-                <select name="" id="" title="사용여부">
-                  <option value="">전체</option>
-                  <option value="">사용</option>
-                  <option value="">미사용</option>
-                </select>
-              </li>
-              <li>
-                <label for="">IP</label>
-                <input type="text" placeholder="IP 입력" title="IP">
-              </li>               
-            </ul>
-          </form>
+  @@include('inc/navigation.html')    
+  <main id="content" class="page">
+    <header class="page-tit">
+      <h2>모델관리</h2>
+      <p class="page-desc">모델을 조회하고 관리할 수 있습니다.</p>        
+    </header>
+    <div class="page-body model-list">
+      <div class="page-wrap search">
+        <form action="" class="search-form">            
+          <ul class="search-lst">                
+            <li>
+              <label for="">모델</label>
+              <input type="text" placeholder="모델명 및 모델약칭 입력" title="모델">
+            </li>
+            <li>
+              <label for="collectYn">분야</label>
+              <select name="" id="collectYn" title="분야">
+                <option value="">전체</option>
+                <option value="">태양흑점폭발</option>
+              </select>
+            </li>
+            <li>
+              <label for="">사용여부</label>
+              <select name="" id="" title="사용여부">
+                <option value="">전체</option>
+                <option value="">사용</option>
+                <option value="">미사용</option>
+              </select>
+            </li>
+            <li>
+              <label for="">IP</label>
+              <input type="text" placeholder="IP 입력" title="IP">
+            </li>               
+          </ul>
+        </form>
+        <div class="tool">
+          <button type="submit" class="btn--primary">검색</button>
+        </div>
+      </div>
+      <div class="page-wrap">
+        <div class="tbl-header"> 
+          <p class="tbl-header__count"><em>총 30개</em> <span>19-49</span>표시</p>
           <div class="tool">
-            <button type="submit" class="btn--primary">검색</button>
+            <button type="button" class="btn--ico-add">모델 추가</button>
           </div>
         </div>
-        <div class="page-wrap">
-          <div class="tbl-header"> 
-            <p class="tbl-header__count"><em>총 30개</em> <span>19-49</span>표시</p>
-            <div class="tool">
-              <button type="button" class="btn--ico-add">모델 추가</button>
-            </div>
-          </div>
-          <div class="tbl-wrap">
-            <table class="tbl tbl--hover">
-              <caption>모델 목록</caption>
-              <thead>
-                <tr>
-                  <th scope="col">NO.</th>
-                  <th scope="col">분야</th>
-                  <th scope="col">모델명</th>
-                  <th scope="col">모델약칭</th>
-                  <th scope="col">IP</th>
-                  <th scope="col">사용여부</th>
-                  <th scope="col">담당자</th>
-                  <th scope="col">내선번호</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr onclick="location.href='model-view.html';">
-                  <td>37</td>
-                  <td>태양흑점폭발</td>
-                  <td><span class="txt-ellipsis">ASSA</span></td>
-                  <td><span class="txt-ellipsis">ASSA</span></td>
-                  <td>192.168.31.45</td>
-                  <td>
-                    <span class="badge badge--use">사용</span>
-                  </td>
-                  <td>홍길동</td>
-                  <td>064-123-4567</td>
-                </tr>    
-                <tr onclick="location.href='model-view.html';">
-                  <td>37</td>
-                  <td>태양흑점폭발</td>
-                  <td><span class="txt-ellipsis">ASSA</span></td>
-                  <td><span class="txt-ellipsis">ASSA</span></td>
-                  <td>192.168.31.45</td>
-                  <td>
-                    <span class="badge badge--notuse">미사용</span>
-                  </td>
-                  <td>홍길동</td>
-                  <td>064-123-4567</td>
-                </tr>    
-              </tbody>
-            </table>
-          </div>          
-        </div>
-      </div>      
-    </main>  
-  </div>
-  @@include('inc/footer.html')
+        <div class="tbl-wrap">
+          <table class="tbl tbl--hover">
+            <caption>모델 목록</caption>
+            <thead>
+              <tr>
+                <th scope="col">NO.</th>
+                <th scope="col">분야</th>
+                <th scope="col">모델명</th>
+                <th scope="col">모델약칭</th>
+                <th scope="col">IP</th>
+                <th scope="col">사용여부</th>
+                <th scope="col">담당자</th>
+                <th scope="col">내선번호</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr onclick="location.href='model-view.html';">
+                <td>37</td>
+                <td>태양흑점폭발</td>
+                <td><span class="txt-ellipsis">ASSA</span></td>
+                <td><span class="txt-ellipsis">ASSA</span></td>
+                <td>192.168.31.45</td>
+                <td>
+                  <span class="badge badge--use">사용</span>
+                </td>
+                <td>홍길동</td>
+                <td>064-123-4567</td>
+              </tr>    
+              <tr onclick="location.href='model-view.html';">
+                <td>37</td>
+                <td>태양흑점폭발</td>
+                <td><span class="txt-ellipsis">ASSA</span></td>
+                <td><span class="txt-ellipsis">ASSA</span></td>
+                <td>192.168.31.45</td>
+                <td>
+                  <span class="badge badge--notuse">미사용</span>
+                </td>
+                <td>홍길동</td>
+                <td>064-123-4567</td>
+              </tr>    
+            </tbody>
+          </table>
+        </div>          
+      </div>
+    </div>      
+    @@include('inc/footer.html')
+  </main>  
 </div>
-<script>
-</script>
+@@include('inc/script.html')
 </body>
 </html>

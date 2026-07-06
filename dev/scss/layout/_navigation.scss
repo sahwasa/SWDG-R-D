@@ -7,8 +7,13 @@
 
 .nav {
   width:v.$lnb-width;
-  border-right:1px solid v.$border-layout;
   padding:20px 0;
+  h1 {
+    font-size: 22px;
+    line-height: 1;
+    margin-bottom: v.$spacing-xl;
+    color: v.$black-900;
+  }
   &__list {
     a{color:v.$black-700;}
     & > li {
@@ -16,7 +21,7 @@
       & > a{
         display:flex;align-items:center;gap:10px;
         font-weight:700;
-        padding:10px 30px;
+        padding:10px 0;
         font-size:v.$text-size-xl;
         border-radius:8px;
         &::before{@include m.shape(28px,30px);background:url(../../images/ico.png) 10px 6px no-repeat;}
@@ -40,37 +45,19 @@
       &:is(.is-active,:hover,:focus)::before{background:url(../../images/ico.png)-57px 0 no-repeat;}
     }
   } 
-}
-
-// ============================================
-// Breadcrumb
-// ============================================
-
-.bredcrumb {
-  margin-left: auto;  
-  ul {
-    @include m.flex;
-  }  
-  li {
-    color: #888;
-    letter-spacing: -0.65px;
-    
-    &:first-child {
-      @include m.ico_only($y: -84px);
-      
-      a {
-        @include m.f_blind;
-      }
-    }
-    
-    &:last-child {
-      color: #000;
-    }
-    
-    &::before {
-      @include m.fontello('\f105');
-      margin: 0 v.$spacing-md;
-      color: #888;
+  &__footer{
+    margin-top:auto;
+    color:v.$black-500;
+    font-size:v.$text-size-sm;
+    letter-spacing:-.13px;
+    white-space:nowrap;
+    align-self:center;
+  }
+  &-toggle{position:absolute;top:55px;right:-20px;
+    @include m.ico_only($y: -211px, $w: 40px, $h: 40px, $imgurl: 'btn.png');
+    @at-root #header.is-collapsed{width:v.$maingap;
+      .nav-toggle::before{background-position-y:-170px;}
+      .header_container{left: -(v.$lnb-width) + v.$maingap;}
     }
   }
 }
